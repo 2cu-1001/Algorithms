@@ -1,0 +1,33 @@
+void rotating_calipers()
+{ 
+	ll a, c = 1, sz = convex_hull.size(),
+		max_dist = LLONG_MIN;
+	for (int i = 0; i < sz; i++)
+	{
+		a = i;
+		while (c != i - 1 && ccw(
+			{ s[convex_hull[a % sz]].cur_x, s[convex_hull[a % sz]].cur_y },
+			{ s[convex_hull[(a + 1) % sz]].cur_x, s[convex_hull[(a + 1) % sz]].cur_y },
+			{ s[convex_hull[c % sz]].cur_x, s[convex_hull[c % sz]].cur_y },
+			{ s[convex_hull[(c + 1) % sz]].cur_x, s[convex_hull[(c + 1) % sz]].cur_y }) > 0)
+		{
+			ll tmp_dist = dist_calc({ s[convex_hull[a]].cur_x, s[convex_hull[a]].cur_y },
+				{ s[convex_hull[c % sz]].cur_x, s[convex_hull[c % sz]].cur_y });
+			if (tmp_dist > max_dist)
+			{
+				max_dist = tmp_dist;
+				s1 = { s[convex_hull[a]].cur_x, s[convex_hull[a]].cur_y };
+				s2 = { s[convex_hull[c % sz]].cur_x, s[convex_hull[c % sz]].cur_y };
+			}
+			c++;
+		}
+		ll tmp_dist = dist_calc({ s[convex_hull[a]].cur_x, s[convex_hull[a]].cur_y },
+			{ s[convex_hull[c % sz]].cur_x, s[convex_hull[c % sz]].cur_y });
+		if (tmp_dist > max_dist)
+		{
+			max_dist = tmp_dist;
+			s1 = { s[convex_hull[a]].cur_x, s[convex_hull[a]].cur_y };
+			s2 = { s[convex_hull[c % sz]].cur_x, s[convex_hull[c % sz]].cur_y };
+		}
+	}
+}

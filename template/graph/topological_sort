@@ -1,0 +1,13 @@
+void topological_sort()
+{
+    for (i = 1; i <= n; i++)
+        if (indegree[i] == 0) pq.push(i);
+    while (!pq.empty()) {
+        int cur = pq.top(); pq.pop();
+        for (int nxt : adj[cur]) {
+            indegree[nxt]--;
+            if (indegree[nxt] == 0) pq.push(nxt);
+        }
+        ans.push_back(cur);
+    }
+}
