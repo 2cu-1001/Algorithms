@@ -8,7 +8,6 @@ void solve()
     }
 
     int q = n / k, st = 0, ed = 0;
-    if (n % k == 0) q--;
     while (n - q * k + q < m) q--;
     for (int i = 1; i <= q; i++) {
         st = ed + 1; ed += k;
